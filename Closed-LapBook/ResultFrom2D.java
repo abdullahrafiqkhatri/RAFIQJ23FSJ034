@@ -7,9 +7,9 @@ public class ResultFrom2D {
 										{96,86,76,66},
 										{70,80,90,99}};
 		
-		
+		int studentCount=1;
 		for(int[] student: studentsMarksArray) {
-			int studentCount=1;
+			
 			int subjectCount = 0;
 			int totalMarks=0;
         	for(int subjectMark:student) {
