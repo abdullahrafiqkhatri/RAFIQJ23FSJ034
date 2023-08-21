@@ -6,7 +6,7 @@ package edu.disease.asn1;
 import java.util.Objects;
 import java.util.UUID;
 /**
- * 
+ * Represents a patient with exposures and disease IDs.
  */
 public class Patient {
 	private UUID patientID;
@@ -16,8 +16,12 @@ public class Patient {
 	private UUID[] diseaseIDs;
 	
 	/**
-	 * 
-	 */
+     * Constructor for creating a Patient instance.
+     *
+     * @param maxDiseases   Maximum number of diseases.
+     * @param maxExposures  Maximum number of exposures.
+     * @throws IllegalArgumentException If maxDiseases or maxExposures are non-positive.
+     */
 	public Patient(int maxDiseases, int maxExposures) {
 		if(maxDiseases<=0 || maxExposures <=0) {
 			throw new IllegalArgumentException("maxDiseases and maxExposure must be greater than zero");
@@ -26,6 +30,12 @@ public class Patient {
 		exposures = new Exposure[maxExposures];
 	}
 	
+	/**
+     * Adds a disease ID to the diseaseIds array.
+     *
+     * @param diseaseId The UUID of the disease.
+     * @throws IndexOutOfBoundsException If the diseaseIds array is full.
+     */
 	public void addDiseaseID(UUID diseaseID) {
 		for(int i=0; i<diseaseIDs.length; i++) {
 			if (diseaseIDs[i] == null) {
@@ -36,6 +46,12 @@ public class Patient {
 		throw new IndexOutOfBoundsException("Disease IDs array is FULL!");
 	}
 	
+	/**
+     * Adds an exposure to the exposures array.
+     *
+     * @param exposure The exposure to add.
+     * @throws IndexOutOfBoundsException If the exposures array is full.
+     */	
 	public void addExposure(Exposure exposure) {
 		for(int i=0; i<exposures.length; i++) {
 			if(exposures[i]== null ) {
