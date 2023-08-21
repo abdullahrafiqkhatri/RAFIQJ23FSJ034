@@ -10,7 +10,12 @@ import java.util.UUID;
 public abstract class Disease {
 	private UUID diseaseID;
 	private String name;
-	
+
+	/**
+     	* Abstract method to get examples of the disease.
+    	*
+    	* @return An array of examples of the disease.
+    	*/
 	public abstract String[] getExamples();
 	
 	/**
