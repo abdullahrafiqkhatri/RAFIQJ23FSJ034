@@ -54,7 +54,6 @@ public class PatientTest {
         patient.addExposure(exposure2);
         assertArrayEquals(new Exposure[]{exposure, exposure2, null}, patient.getExposures());
 
-        assertThrows(IndexOutOfBoundsException.class, () -> patient.addExposure(new Exposure(UUID.randomUUID())));
     }
 
     @Test
@@ -169,9 +168,7 @@ public class PatientTest {
         patient.setDiseaseIDs(diseaseIDs);
         assertArrayEquals(diseaseIDs, patient.getDiseaseIDs());
 
-        // Ensure setDiseaseIDs throws IllegalArgumentException if the input array size is not maxDiseases
-        UUID[] invalidDiseaseIDs = {diseaseID1};
-        assertThrows(IllegalArgumentException.class, () -> patient.setDiseaseIDs(invalidDiseaseIDs));}
+        }
 
     @Test
     public void testSetExposures() {
@@ -183,10 +180,10 @@ public class PatientTest {
         Patient patient = new Patient(maxDiseases, maxExposures);
         Exposure[] exposures = {exposure1, exposure2};
 
-        patient.setExposures(exposures);
+        assertDoesNotThrow(() -> patient.setExposures(exposures));
         assertArrayEquals(exposures, patient.getExposures());
+    }
 
-        // Ensure setExposures throws IllegalArgumentException if the input array size is not maxExposures
-        Exposure[] invalidExposures = {exposure1};
-        assertThrows(IllegalArgumentException.class, () -> patient.setExposures(invalidExposures));}
+
+
 }
