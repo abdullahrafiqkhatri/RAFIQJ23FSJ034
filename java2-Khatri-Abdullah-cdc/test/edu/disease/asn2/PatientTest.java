@@ -1,10 +1,68 @@
-package edu.disease.asn1;
+package edu.disease.asn2;
 
 import org.junit.jupiter.api.Test;
+
+import edu.disease.asn1.Exposure;
+
 import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PatientTest {
+	
+	@Test
+    public void testCompareToEqual() {
+        Patient patient1 = new Patient(3, 5);
+        patient1.setFirstName("John");
+        patient1.setLastName("Doe");
+
+        Patient patient2 = new Patient(3, 5);
+        patient2.setFirstName("John");
+        patient2.setLastName("Doe");
+
+        assertEquals(0, patient1.compareTo(patient2));
+    }
+
+    @Test
+    public void testCompareToLastNameBefore() {
+        Patient patient1 = new Patient(3, 5);
+        patient1.setFirstName("Alice");
+        patient1.setLastName("Smith");
+    }
+
+    @Test
+    public void testCompareToLastNameAfter() {
+        Patient patient1 = new Patient(3, 5);
+        patient1.setFirstName("Bob");
+        patient1.setLastName("Doe");
+
+        
+    }
+
+    @Test
+    public void testCompareToFirstNameBefore() {
+        Patient patient1 = new Patient(3, 5);
+        patient1.setFirstName("Alice");
+        patient1.setLastName("Doe");
+
+        Patient patient2 = new Patient(3, 5);
+        patient2.setFirstName("Alice");
+        patient2.setLastName("Smith");
+
+        assertTrue(patient1.compareTo(patient2) < 0);
+    }
+
+    @Test
+    public void testCompareToFirstNameAfter() {
+        Patient patient1 = new Patient(3, 5);
+        patient1.setFirstName("Alice");
+        patient1.setLastName("Smith");
+
+        Patient patient2 = new Patient(3, 5);
+        patient2.setFirstName("Alice");
+        patient2.setLastName("Doe");
+
+        assertTrue(patient1.compareTo(patient2) > 0);
+    }
 
     @Test
     public void testConstructorAndGetters() {
@@ -54,6 +112,7 @@ public class PatientTest {
         patient.addExposure(exposure2);
         assertArrayEquals(new Exposure[]{exposure, exposure2, null}, patient.getExposures());
 
+        
     }
 
     @Test
@@ -155,8 +214,33 @@ public class PatientTest {
         assertThrows(IllegalArgumentException.class, () -> new Patient(5, -1));
     }
 
+    @Test
+    public void testSetDiseaseIDs() {
+        int maxDiseases = 2;
+        int maxExposures = 3;
+        UUID diseaseID1 = UUID.randomUUID();
+        UUID diseaseID2 = UUID.randomUUID();
 
+        Patient patient = new Patient(maxDiseases, maxExposures);
+        UUID[] diseaseIDs = {diseaseID1, diseaseID2};
 
+        patient.setDiseaseIDs(diseaseIDs);
+        assertArrayEquals(diseaseIDs, patient.getDiseaseIDs());
 
+        }
 
+    @Test
+    public void testSetExposures() {
+        int maxDiseases = 2;
+        int maxExposures = 3;
+        Exposure exposure1 = new Exposure(UUID.randomUUID());
+        Exposure exposure2 = new Exposure(UUID.randomUUID());
+
+        Patient patient = new Patient(maxDiseases, maxExposures);
+        Exposure[] exposures = {exposure1, exposure2};
+
+        patient.setExposures(exposures);
+        assertArrayEquals(exposures, patient.getExposures());
+
+        }
 }

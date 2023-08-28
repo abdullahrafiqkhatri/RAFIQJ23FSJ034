@@ -26,7 +26,7 @@ public class Patient implements Comparable<Patient> {
      * @throws IllegalArgumentException If maxDiseases or maxExposures are non-positive.
      */
 	public Patient(int maxDiseases, int maxExposures) {
-		if(maxDiseases<=0 && maxExposures <=0) {
+		if(maxDiseases<=0 || maxExposures <=0) {
 			throw new IllegalArgumentException("maxDiseases and maxExposure must be greater than zero");
 		}
 		diseaseIDs = new UUID[maxDiseases];

@@ -5,17 +5,17 @@ package edu.disease.asn2;
 import java.util.Objects;
 import java.util.UUID;
 /**
- * 
+ * Represents an abstract disease.
  */
 public abstract class Disease {
 	private UUID diseaseID;
 	private String name;
-
+	
 	/**
-     	* Abstract method to get examples of the disease.
-    	*
-    	* @return An array of examples of the disease.
-    	*/
+     * Abstract method to get examples of the disease.
+     *
+     * @return An array of examples of the disease.
+     */
 	public abstract String[] getExamples();
 	
 	/**

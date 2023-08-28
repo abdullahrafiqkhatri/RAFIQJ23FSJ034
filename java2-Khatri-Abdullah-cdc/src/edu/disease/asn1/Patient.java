@@ -51,7 +51,7 @@ public class Patient {
      *
      * @param exposure The exposure to add.
      * @throws IndexOutOfBoundsException If the exposures array is full.
-     */	
+     */
 	public void addExposure(Exposure exposure) {
 		for(int i=0; i<exposures.length; i++) {
 			if(exposures[i]== null ) {
@@ -111,13 +111,7 @@ public class Patient {
 		return exposures;
 	}
 	
-	/**
-	 * @param exposures the exposures to set
-	 */
-	public void setExposures(Exposure[] exposures) {
-		this.exposures = exposures;
-	}
-	
+
 	/**
 	 * @return the diseaseIDs
 	 */
@@ -125,12 +119,7 @@ public class Patient {
 		return diseaseIDs;
 	}
 	
-	/**
-	 * @param diseaseIDs the diseaseIDs to set
-	 */
-	public void setDiseaseIDs(UUID[] diseaseIDs) {
-		this.diseaseIDs = diseaseIDs;
-	}
+	
 	
 	@Override
 	public int hashCode() {

@@ -23,13 +23,15 @@ public class DiseaseControlManagerImpl implements DiseaseControlManager{
 		}
 		
 		diseases = new Disease[maxDiseases];
-		patients = new Patient[maxPatients];
+		setPatients(new Patient[maxPatients]);
 	}
 	/**
 	 * To find Empty Index in the array.
 	 * @param array Send object's array
 	 * @return If found then the INDEX number or negative1.
 	 */
+	
+	
 	public int findEmptyIndex(Object[] array) {
 		for(int i=0; i<array.length; i++) {
 			if(array[i]== null ) {
@@ -54,6 +56,7 @@ public class DiseaseControlManagerImpl implements DiseaseControlManager{
 			newDisease = new NonInfectiousDisease();
 		}
 		newDisease.setName(name);
+		newDisease.setDiseaseID(UUID.randomUUID());
 		diseases[emptyIndex] = newDisease;
 		return newDisease;		
 	}
@@ -61,7 +64,7 @@ public class DiseaseControlManagerImpl implements DiseaseControlManager{
 	@Override
 	public Disease getDisease(UUID diseaseId) {
 		for(Disease disease : diseases) {
-			if(disease !=null || disease.getDiseaseID().equals(diseaseId)) {
+			if(disease != null && disease.getDiseaseID().equals(diseaseId)) {
 				return disease;
 			}
 		}
@@ -70,7 +73,7 @@ public class DiseaseControlManagerImpl implements DiseaseControlManager{
 
 	@Override
 	public Patient addPatient(String firstName, String lastName, int maxDiseases, int maxExposure) {
-		emptyIndex = findEmptyIndex(patients);
+		emptyIndex = findEmptyIndex(getPatients());
 		if(emptyIndex == -1) {
 			throw new IllegalStateException("No more patients can be added.");
 		}
@@ -78,13 +81,16 @@ public class DiseaseControlManagerImpl implements DiseaseControlManager{
 		Patient newPatient = new Patient(maxDiseases, maxExposure);
 		newPatient.setFirstName(firstName);
 		newPatient.setLastName(lastName);
-		patients[emptyIndex] = newPatient;
+		newPatient.setPatientID(UUID.randomUUID());
+		getPatients()[emptyIndex] = newPatient;
 		return newPatient;
 	}
-
+	
+	
+	
 	@Override
 	public Patient getPatient(UUID patientId) {
-		for(Patient patient : patients) {
+		for(Patient patient : getPatients()) {
 			if(patient != null && patient.getPatientID().equals(patientId)) {
 				return patient;
 			}
@@ -122,6 +128,18 @@ public class DiseaseControlManagerImpl implements DiseaseControlManager{
 		
 		patient.addExposure(exposure);
 		
+	}
+	/**
+	 * @return the patients
+	 */
+	public Patient[] getPatients() {
+		return patients;
+	}
+	/**
+	 * @param patients the patients to set
+	 */
+	public void setPatients(Patient[] patients) {
+		this.patients = patients;
 	}
 	
 }

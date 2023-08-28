@@ -33,6 +33,13 @@ public class Exposure {
 	}
 	
 	/**
+	 * @param patientId the patientId to set
+	 */
+	public void setPatientId(UUID patientId) {
+		this.patientId = patientId;
+	}
+	
+	/**
      * Getter for the dateTime property.
      *
      * @return The date and time of the exposure.
